@@ -18,8 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/student','ControllerApi@create');
-Route::get('/student','ControllerApi@show');
-Route::get('/student/{id}','ControllerApi@showid');
+Route::get('/studentshow','ControllerApi@show');
+Route::get('/studentShowByID/{id}','ControllerApi@showid');
 Route::put('/studentupdate/{id}','ControllerApi@UpdateByid');
 Route::delete('/StudentDelete/{id}','ControllerApi@deleteByid');
 
+Route::post('/login', 'UserController@login');
+Route::post('/register', 'API\UserController@register');
+Route::group(['middleware' => 'auth:api'], function(){
+Route::post('/details', 'API\UserController@details');
+});
